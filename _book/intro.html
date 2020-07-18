@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Probability and Inference | Bayesian Data Analysis Workbook</title>
+  <meta name="description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Probability and Inference | Bayesian Data Analysis Workbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Probability and Inference | Bayesian Data Analysis Workbook" />
+  
+  <meta name="twitter:description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  
+
+<meta name="author" content="Alex Liebscher" />
+
+
+<meta name="date" content="2020-07-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Data Analysis Workbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#collaboration"><i class="fa fa-check"></i><b>1.1</b> Collaboration</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Probability and Inference</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#bayesian-inference"><i class="fa fa-check"></i><b>2.1</b> Bayesian inference</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#inference-about-a-genetic-status"><i class="fa fa-check"></i><b>2.1.1</b> Inference about a genetic status</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Data Analysis Workbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Probability and Inference</h1>
+<p>Bayesian data analysis may be broken down into three distinct steps:</p>
+<ol style="list-style-type: decimal">
+<li>Designing the full probability model</li>
+<li>Conditioning on observed data</li>
+<li>Evaluating the fit of the model</li>
+</ol>
+<p>A primary motivation for adopting a Bayesian framework is that it allows us to interpret the statistical conclusions closer to our common-sense human intuition. The central feature to Bayesian analysis is the direct quantification of uncertainty.</p>
+<p>In terms of notation, we define:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\theta\)</span> as the unobservable vector quantities or population parameters of interest.
+<ol style="list-style-type: lower-alpha">
+<li>Example: the probabilities of survival under a control and a treatment for randomly chosen members of the population.</li>
+</ol></li>
+<li><span class="math inline">\(y\)</span> as the observed data.
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Example: the known number of survivors and deaths in both the control and treatment groups.</li>
+</ol></li>
+<li><span class="math inline">\(\tilde{y}\)</span> as unknown, but potentially observable, quanitites.
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Example: the outcome (survival or death) of an unseen patient similar to those already in the experiment.</li>
+</ol></li>
+</ol>
+<p>The <span class="math inline">\(y\)</span> variables are called the “outcomes” and may be represented as, e.g. 1 if patient <span class="math inline">\(i\)</span> survives and 0 is patient <span class="math inline">\(i\)</span> dies, so that <span class="math inline">\(y\)</span> takes the form of a vector. These values are considered <em>random</em> when making inferences because there is the possibility they could have been the opposite outcome due to the sampling process or the natural variation in the population.</p>
+<p>For the time being, we consider the values of <span class="math inline">\(y\)</span> to be independent and identically distributed (iid).</p>
+<p>It also common to have explanatory variables or covariates. This may include age, previous health status, etc. <span class="math inline">\(X\)</span> denotes this set of <span class="math inline">\(k\)</span> variables across all <span class="math inline">\(n\)</span> observations.</p>
+<div id="bayesian-inference" class="section level2">
+<h2><span class="header-section-number">2.1</span> Bayesian inference</h2>
+<p>Conclusions in a Bayesian framework about our <span class="math inline">\(\theta\)</span> (remember, the unobservable quantities or population parameters), or our <span class="math inline">\(\tilde{y}\)</span> (our unknown, but possible, outcomes), stem from either <span class="math inline">\(p(\theta | y)\)</span> or <span class="math inline">\(p(\tilde{y} | y)\)</span>. This is to say that our parameters, or our unknown outcomes, are identified through a probability statement, conditional on our observed data.</p>
+<p>Knowing that this is what we’re chasing, we can introduce Bayes’ rule:</p>
+<p><span class="math display">\[
+p(\theta, y) = p(\theta)p(y|\theta)
+\]</span></p>
+<p>In this equation, <span class="math inline">\(p(\theta)\)</span> is called the <em>prior distribution</em>, and <span class="math inline">\(p(y|\theta)\)</span> is called the <em>sampling distribution</em>.</p>
+<p>Note that we can also write this as <span class="math inline">\(p(\theta, y) = p(y)p(\theta|y)\)</span>. Therefore, together with the last result,</p>
+<p><span class="math display">\[
+p(\theta|y) = \frac{p(\theta,y)}{p(y)} = \frac{p(\theta)p(y|\theta)}{p(y)}
+\]</span></p>
+<p>where the <em>prior predictive distribution</em> is <span class="math inline">\(p(y) = \sum_\theta p(\theta)p(y|\theta)\)</span> (or <span class="math inline">\(p(y)=\int p(\theta)p(y|\theta)d\theta\)</span> if <span class="math inline">\(\theta\)</span> is continuous).</p>
+<p>This is called the <em>posterier density</em>. These formulas represent the core of Bayesian statistics.</p>
+<p>The distribuion of <span class="math inline">\(\tilde{y}\)</span> is called the <em>posterior predictive distribution</em> and takes the form:</p>
+<p><span class="math display">\[
+p(\tilde{y}|y) = \int p(\tilde{y},\theta|y)d\theta = \int p(\tilde{y}|\theta,y)p(\theta|y)d\theta
+\]</span></p>
+<div id="inference-about-a-genetic-status" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Inference about a genetic status</h3>
+<p>A first example, with setup found under Section 1.4 pg. 8.</p>
+<p>First, we set up the prior distribution:</p>
+<blockquote>
+<p>Consider a woman who has an affected brother, which implies that her mother must be a carrier of the hemophilia gene with one ‘good’ and one ‘bad’ hemophilia gene. We are also told that her father is not affected; thus the woman herself has a fifty-fifty chance of having the gene. The unknown quantity of interest, the state of the woman, has just two values: the woman is either a carrier of the gene (<span class="math inline">\(\theta\)</span> = 1) or not (<span class="math inline">\(\theta\)</span> = 0). Based on the information provided thus far, the prior distribution for the unknown <span class="math inline">\(\theta\)</span> can be expressed simply as P(<span class="math inline">\(\theta = 1\)</span>) = P(<span class="math inline">\(\theta = 0\)</span>) = <span class="math inline">\(\frac{1}{2}\)</span>.</p>
+</blockquote>
+<p>Second, we establish our data model and the likelihood formula:</p>
+<p>There are two possible worlds here: first, the woman in question is affected; second, the women in question is <em>not</em> affected. Suppose she has two sons, neither of whom are affected. The status of the two sons is independent: one son’s status does not affect the other’s. They both, however, rely on the mother’s (unknown) status; they are conditional upon her status. Thus, the two items of independent data generate the following likelihood functions:</p>
+<center>
+P(son<span class="math inline">\(_1\)</span> unaffected, son<span class="math inline">\(_2\)</span> unaffected <span class="math inline">\(| \theta = 1) = (0.5)(0.5) = 0.25\)</span>
+</center>
+<center>
+P(son<span class="math inline">\(_1\)</span> unaffected, son<span class="math inline">\(_2\)</span> unaffected <span class="math inline">\(| \theta = 0) = (1)(1) = 1\)</span>
+</center>
+<p>Third, we establish the posterior distribution:</p>
+<p>Using Bayes’ rule, we can now combine the information we know from the data with our prior knowledge. If we let <span class="math inline">\(y\)</span> = (son<span class="math inline">\(_1\)</span> status, son<span class="math inline">\(_2\)</span> status), then:</p>
+<p><span class="math display">\[
+P(\theta = 1|y) = \frac{p(y|\theta = 1)P(\theta = 1)}{p(y|\theta = 1)P(\theta = 1) + p(y|\theta = 0)P(\theta = 0)}\\
+= \frac{(0.25)(0.5)}{(0.25)(0.5) + (1.0)(0.5)} = \frac{0.125}{0.625} = 0.2
+\]</span></p>
+<p>A key aspect of Bayesian analysis is the ease at which we may add additional data to the mix. For example, suppose the mother has a third son. We don’t need to recalculate the entire formula from where we started, instead we can substitute the newly found posterior distribution as the new data model (<span class="math inline">\(y\)</span> = (son<span class="math inline">\(_1\)</span> status, son<span class="math inline">\(_2\)</span> status, son<span class="math inline">\(_3\)</span> status)):</p>
+<p><span class="math display">\[
+P(\theta = 1|y) = \frac{p(y|\theta = 1)P(\theta = 1)}{p(y|\theta = 1)P(\theta = 1) + p(y|\theta = 0)P(\theta = 0)}\\
+= \frac{(0.2)(0.5)}{(0.2)(0.5) + (1.0)(0.8)} = \frac{0.1}{0.9} = 0.111
+\]</span></p>
+<p>Point of confusion: On pg. 9 the authors say: “we use the previous posterior distribution as the new prior distribution”. However, according to their definition of the prior distribution <span class="math inline">\(p(\theta)\)</span>, it would seem as though they’re actually replacing the <em>likelihood</em> function <span class="math inline">\(p(y|\theta)\)</span>.</p>
+<p>In any case, the new probability of the mother being a carrier is 11.1% given the status of her three sons.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BayesianDataAnalysisWorkbook.pdf", "BayesianDataAnalysisWorkbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

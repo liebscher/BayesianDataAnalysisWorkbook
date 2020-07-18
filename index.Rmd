@@ -1,0 +1,29 @@
+--- 
+title: "Bayesian Data Analysis Workbook"
+author: "Alex Liebscher"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)"
+---
+
+# Introduction
+
+Contained within this notebook is an approximate following of Bayesian Data Analysis (3rd edition) by Gelman, Carlin, Stern, Dunson, Vehtari, and Rubin (2020).
+
+My goal is to follow the book, with as few jumps as necessary, and copy their work, their writing, and their code. Through this, I hope to learn how to apply Bayesian principles to the everyday data analysis problem.
+
+Most of the text used in this workbook is paraphrased directly from the original without shame. Their examples are sufficient and in many cases I would do a disservice altering their language. This workbook is simply an exercise to practice active reading, note-taking, and implementation. It is an opportunity to learn something about Bayesian inference from a collection of bright scholars to whom I trust to present a thorough, captivating read of the subject.
+
+I anticipate this to be highly interactive, which is why I've opted to work directly in a `bookdown` format. Hopefully, some nice plots will be created along the way.
+
+Some code might be compared to [Aki Vehtari's](https://github.com/avehtari/BDA_R_demos). Vehtari also has published their [own lecture notes](https://github.com/avehtari/BDA_course_Aalto), which could also be a helpful resource. Luckily too, it seems like most of the data is hosted on Gelman's site - this should come in handy.
+
+## Collaboration
+
+I am looking for a reading group to incrementally work through the textbook and have discussions with. If you are looking to learn about Bayesian inference, I hope you won't be shy and we can struggle together. Email me at `alexliebscher0@gmail.com` and just say you're interested, I'll figure out the rest.
+
+Moreover, feel free to clone this repo for a quick start.
