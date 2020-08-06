@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bayesian Data Analysis Workbook</title>
+  <title>Chapter 4 Multi-Parameter Models | Bayesian Data Analysis Workbook</title>
   <meta name="description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bayesian Data Analysis Workbook" />
+  <meta property="og:title" content="Chapter 4 Multi-Parameter Models | Bayesian Data Analysis Workbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bayesian Data Analysis Workbook" />
+  <meta name="twitter:title" content="Chapter 4 Multi-Parameter Models | Bayesian Data Analysis Workbook" />
   
   <meta name="twitter:description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="single.html"/>
 
-<link rel="next" href="intro.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -144,32 +144,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Bayesian Data Analysis Workbook</h1>
-<p class="author"><em>Alex Liebscher</em></p>
-<p class="date"><em>2020-08-05</em></p>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>Contained within this notebook is an approximate following of Bayesian Data Analysis (3rd edition) by Gelman, Carlin, Stern, Dunson, Vehtari, and Rubin (2020).</p>
-<p>My goal is to follow the book, with as few jumps as necessary, and copy their work, their writing, and their code. Through this, I hope to learn how to apply Bayesian principles to the everyday data analysis problem.</p>
-<p>Most of the text used in this workbook is paraphrased directly from the original without shame. Their examples are sufficient and in many cases I would do a disservice altering their language. This workbook is simply an exercise to practice active reading, note-taking, and implementation. It is an opportunity to learn something about Bayesian inference from a collection of bright scholars to whom I trust to present a thorough, captivating read of the subject.</p>
-<p>I anticipate this to be highly interactive, which is why I’ve opted to work directly in a <code>bookdown</code> format. Hopefully, some nice plots will be created along the way.</p>
-<p>Some code might be compared to <a href="https://github.com/avehtari/BDA_R_demos">Aki Vehtari’s</a>. Vehtari also has published their <a href="https://github.com/avehtari/BDA_course_Aalto">own lecture notes</a>, which could also be a helpful resource. Luckily too, it seems like most of the data is hosted on Gelman’s site - this should come in handy.</p>
-<div id="collaboration" class="section level2">
-<h2><span class="header-section-number">1.1</span> Collaboration</h2>
-<p>I am looking for a reading group to incrementally work through the textbook and have discussions with. If you are looking to learn about Bayesian inference, I hope you won’t be shy and we can struggle together. Email me at <code>alexliebscher0@gmail.com</code> and just say you’re interested, I’ll figure out the rest.</p>
-<p>Moreover, feel free to clone this repo for a quick start.</p>
+<div id="multi" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Multi-Parameter Models</h1>
+<p>Chapter 3 - To be completed</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dnorminchi &lt;-<span class="st"> </span><span class="cf">function</span> (mu, sig, mu_<span class="dv">0</span>, k_<span class="dv">0</span>, sig_<span class="dv">0</span>, v_<span class="dv">0</span>, y) {
+  y_mean &lt;-<span class="st"> </span><span class="kw">mean</span>(y)
+  n &lt;-<span class="st"> </span><span class="kw">length</span>(y)
+  
+  mu_n &lt;-<span class="st"> </span>(k_<span class="dv">0</span> <span class="op">*</span><span class="st"> </span>mu_<span class="dv">0</span>)<span class="op">/</span>(k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n) <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(y)<span class="op">/</span>(k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n)
+  k_n &lt;-<span class="st"> </span>k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n
+  sig_n &lt;-<span class="st"> </span>sig_<span class="dv">0</span>
+  v_n &lt;-<span class="st"> </span>v_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n
+  
+  <span class="kw">return</span>(sig<span class="op">^-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(sig<span class="op">^</span><span class="dv">2</span>)<span class="op">^</span>(<span class="op">-</span>(v_n<span class="op">/</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>
+<span class="st">           </span><span class="kw">exp</span>((mu<span class="op">-</span>mu_n)<span class="op">^</span><span class="dv">2</span>))
+}
 
-</div>
+dmarginal_mu &lt;-<span class="st"> </span><span class="cf">function</span> (mu, mu_<span class="dv">0</span>, sig_<span class="dv">0</span>, k_<span class="dv">0</span>, v_<span class="dv">0</span>, y) {
+  
+  y_mean &lt;-<span class="st"> </span><span class="kw">mean</span>(y)
+  n &lt;-<span class="st"> </span><span class="kw">length</span>(y)
+  
+  mu_n &lt;-<span class="st"> </span>(k_<span class="dv">0</span> <span class="op">*</span><span class="st"> </span>mu_<span class="dv">0</span>)<span class="op">/</span>(k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n) <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(y)<span class="op">/</span>(k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n)
+  k_n &lt;-<span class="st"> </span>k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n
+  v_n &lt;-<span class="st"> </span>v_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n
+  sig_n &lt;-<span class="st"> </span>v_<span class="dv">0</span> <span class="op">*</span><span class="st"> </span>sig_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="kw">var</span>(y) <span class="op">+</span><span class="st"> </span>k_<span class="dv">0</span> <span class="op">*</span><span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(y_mean <span class="op">-</span><span class="st"> </span>mu_<span class="dv">0</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(k_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>n)
+  sig_n &lt;-<span class="st"> </span>sig_n <span class="op">/</span><span class="st"> </span>v_n
+  
+  <span class="kw">print</span>(<span class="kw">c</span>(mu_n, k_n, sig_n, v_n))
+  
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mu =</span> (mu <span class="op">-</span><span class="st"> </span>mu_n)<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>k_n <span class="op">/</span><span class="st"> </span>sig_n<span class="op">^</span><span class="dv">2</span>, <span class="dt">df =</span> v_n,
+           <span class="dt">mu_n =</span> mu_n, <span class="dt">k_n =</span> k_n, <span class="dt">sig_n =</span> sig_n, <span class="dt">v_n =</span> v_n))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mu &lt;- seq(-10, 10, by=0.1)</span>
+<span class="co"># plot(NA, xlim = c(-10, 10), ylim = c(0, 0.5))</span>
+<span class="co"># posterior &lt;- dmarginal_mu(mu, 1, 10, 0, 0, c(1,2))</span>
+<span class="co"># lines(mu, dt(posterior$mu, posterior$df))</span>
+<span class="co"># </span>
+<span class="co"># par(col = &quot;red&quot;)</span>
+<span class="co"># lines(mu, dmarginal_mu(mu, posterior$mu_n, posterior$sig_n, posterior$k_n, posterior$v_n, </span>
+<span class="co">#                        c(-4,-7,-8,-5,-4,3,2)))</span>
+<span class="co"># </span>
+<span class="co"># par(col = &quot;orange&quot;)</span>
+<span class="co"># lines(mu, dmarginal_mu(mu, 1, 10, 0, 0, c(-4,-7,-8,-5,-4,3,2,2,2,2,2,2,2)))</span>
+<span class="co"># </span>
+<span class="co"># par(col = &quot;yellow&quot;)</span>
+<span class="co"># lines(mu, dmarginal_mu(mu, 1, 10, 0, 0, c(-4,-7,-8,-5,-4,3,2,2,2,2,2,2,2,3,3,3,3,3,3,3)))</span></code></pre></div>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="single.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

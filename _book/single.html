@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Single-Parameter Models | Bayesian Data Analysis Workbook</title>
+  <meta name="description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Single-Parameter Models | Bayesian Data Analysis Workbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Single-Parameter Models | Bayesian Data Analysis Workbook" />
+  
+  <meta name="twitter:description" content="Approximate reading and interaction Bayesian Data Analysis (3rd edition) by Gelman et al (2020)" />
+  
+
+<meta name="author" content="Alex Liebscher" />
+
+
+<meta name="date" content="2020-08-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="multi.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bayesian Data Analysis Workbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#collaboration"><i class="fa fa-check"></i><b>1.1</b> Collaboration</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Probability and Inference</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#bayesian-inference"><i class="fa fa-check"></i><b>2.1</b> Bayesian inference</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#inference-about-a-genetic-status"><i class="fa fa-check"></i><b>2.1.1</b> Inference about a genetic status</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single.html"><a href="single.html"><i class="fa fa-check"></i><b>3</b> Single-Parameter Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="single.html"><a href="single.html#estimating-a-binomial-model"><i class="fa fa-check"></i><b>3.1</b> Estimating a binomial model</a></li>
+<li class="chapter" data-level="3.2" data-path="single.html"><a href="single.html#summarizing-posterior-inference"><i class="fa fa-check"></i><b>3.2</b> Summarizing posterior inference</a></li>
+<li class="chapter" data-level="3.3" data-path="single.html"><a href="single.html#informative-priors"><i class="fa fa-check"></i><b>3.3</b> Informative Priors</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="single.html"><a href="single.html#estimating-a-rate-from-poisson-data-an-idealized-example"><i class="fa fa-check"></i><b>3.3.1</b> Estimating a rate from Poisson data: an idealized example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single.html"><a href="single.html#noninformative-and-weakly-informative-priors"><i class="fa fa-check"></i><b>3.4</b> Noninformative and Weakly Informative Priors</a></li>
+<li class="chapter" data-level="3.5" data-path="single.html"><a href="single.html#single-parameter-example"><i class="fa fa-check"></i><b>3.5</b> Single-parameter Example</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multi.html"><a href="multi.html"><i class="fa fa-check"></i><b>4</b> Multi-Parameter Models</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Data Analysis Workbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="single" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Single-Parameter Models</h1>
+<p>Our dive into Bayesian stats will begin with single-parameter models. These are distinct from multi-parameter models. The difference being the number of unknowns in the models: if we’re modeling some Poisson distributed data, the density function has one parameter, <span class="math inline">\(\lambda\)</span>, that is unidimensional. If our data is normally distributed and we don’t know anything about the model, we are missing two parameters: <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
+<div id="estimating-a-binomial-model" class="section level2">
+<h2><span class="header-section-number">3.1</span> Estimating a binomial model</h2>
+<p>If we have data that naturally arise from a sequence of <span class="math inline">\(n\)</span> trials from a large population, and each trial can either be a “success” or a “failure” (or some other two outcome framework), then the problem is suitably modeled by a binomial distribution. Since the trials are IID, we can simply define some parameter <span class="math inline">\(\theta\)</span> which represents the proportion of “successes” in the population. Thus, the binomial sampling model is:</p>
+<p><span class="math display">\[
+p(y|\theta) = Bin(y|n,\theta) = {n \choose y} \theta^y (1-\theta)^{n-y}
+\]</span></p>
+<p>Here, <span class="math inline">\(n\)</span> is taken as a fixed given, so we can drop it from the lefthand.</p>
+<p>To perform Bayesian inference in the binomial model, we’ll first specify a prior distribution over <span class="math inline">\(\theta\)</span>, our only parameter. For simplicity’s sake, we can pick a prior which specifies absolutely no information about the value of <span class="math inline">\(\theta\)</span>: the uniform distribution on <span class="math inline">\([0,1]\)</span>. Remember, <span class="math inline">\(\theta\)</span> is the proportion of times something happens in a population, so it makes sense to work on the domain from 0 to 1.</p>
+<p>Keep in mind Bayes’ rule: <span class="math inline">\(p(\theta|y) \propto p(\theta)p(y|\theta)\)</span>.</p>
+<p><span class="math inline">\(p(\theta)\)</span> is a scalar value (such as, in this case, <span class="math inline">\(1/n\)</span>), and is equal to the probability of a uniform density draw, thus it can be “hidden” in the proportionality. Moreover, the binomial coefficient from <span class="math inline">\(p(y|\theta)\)</span> can be “hidden” since it doesn’t rely on <span class="math inline">\(\theta\)</span>.</p>
+<p>Now, remember the density function of the Beta distribution:</p>
+<p><span class="math display">\[
+f(\alpha, \beta) = \frac{\Gamma(\alpha + \beta)x^{\alpha-1}(1-x)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)}
+\]</span></p>
+<p>We can calculate the posterior of <span class="math inline">\(p(\theta|y)\)</span> using the information above, and note the form after:</p>
+<p><span class="math display">\[
+p(\theta|y) \propto \theta^y (1-\theta)^{n-y}
+\]</span></p>
+<p>We can see here that the unnormalized posterior density is a form of the Beta distribution, specifically:</p>
+<p><span class="math display">\[
+\theta|y \sim Beta(y + 1, n - y + 1)
+\]</span></p>
+<p>This is helpful because we now have a closed, analytical form of the posterior distribution which makes use of our data. This is great because when we want to describe our posterior by, e.g. the mean or standard deviation, there already exist closed-form solutions (the mean of the Beta distribution is <span class="math inline">\(\frac{y+1}{n+2}\)</span>).</p>
+</div>
+<div id="summarizing-posterior-inference" class="section level2">
+<h2><span class="header-section-number">3.2</span> Summarizing posterior inference</h2>
+<p>One key relationship we can draw at this point is: the posterior distribution is centered at a point that falls between what we know from the prior distribution and what we know from the data, and this compromise is controlled to a greater extent by the data as the sample size increases.</p>
+<p>With only one parameter, we can easily plot the posterior distribution, although it gets a little trickier as we add more parameters.</p>
+<p>For example, here’s the last binomial distribution example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span><span class="cf">function</span> (theta, n, y) theta<span class="op">^</span>y <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span>(n<span class="op">-</span>y)
+
+<span class="co"># we have 100 births total</span>
+N &lt;-<span class="st"> </span><span class="dv">100</span>
+<span class="co"># 60 of those births were females</span>
+y &lt;-<span class="st"> </span><span class="dv">60</span>
+
+<span class="co"># the ratio of female births will fall between 0 and 1</span>
+theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.01</span>)
+
+<span class="kw">plot</span>(theta, <span class="kw">posterior</span>(theta, N, y), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<p><img src="BayesianDataAnalysisWorkbook_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>To interpret this, we have the unnormalized posterior density on the Y-axis, and our only parameter, <span class="math inline">\(\theta\)</span>, on the X-axis. We see that the probability of <span class="math inline">\(\theta\)</span> being between out 0.5 and 0.7 is extremely high. Well, we did have 60 successes out 100 trials, so it makes sense that the underlying parameter for this would lie around 0.6.</p>
+<p>One other key descriptive interval we can define for our posterior distribution is the <strong>highest posterior density region</strong>, which is the set of values that contains <span class="math inline">\(100(1-\alpha)\%\)</span> of the posterior probability. This is a useful interval similar to just a percentile interval, but allows us to characterize distributions with e.g. more than one mode.</p>
+</div>
+<div id="informative-priors" class="section level2">
+<h2><span class="header-section-number">3.3</span> Informative Priors</h2>
+<p>How do we go about constructing a prior though? There are two guides for how to decide: first, under the population interpretation, the prior distribution should represent a population of parameter values; second, under the state of knowledge interpretation, the prior should represent our knowledge (or uncertainty) about the parameter as if its value were a random draw from the prior.</p>
+<p>Typically, the prior should contain all possible realistic values of the parameter, but need not be concentrated around any one value. Often, the data will far outweigh the prior’s information (NB: this makes me wonder what the exact purpose of an intial prior is).</p>
+<p>An alternative to the uniform prior distribution we used in our last example is the Beta distribution. With the form <span class="math inline">\(p(\theta)\propto \theta^{\alpha-1}(1-\theta)^{\beta-1}\)</span>, where we have two parameters, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, which can be seen as “prior successes” and “prior failures.” These are also known as <em>hyperparameters</em>, as are any parameters of the prior distribution.</p>
+<p>Applying Bayes’ rule and we wind up with the posterior density for <span class="math inline">\(\theta\)</span> as:</p>
+<p><span class="math display">\[
+p(\theta|y) \propto \theta^y(1-\theta)^{n-y}\theta^{\alpha-1}(1-\theta)^{\beta-1} = \text{Beta}(\theta|\alpha+y, \beta+n-y)
+\]</span></p>
+<p>Which is to say, the binomial likelihood bound to a Beta prior leaves us with a Beta posterior. When the posterior is of the same parametric form as the prior, we call this a <em>conjugate form</em>. Conjugate priors are great because they’re easy to compute (both analytically and computationally), and they improve our ability to understand new data.</p>
+<p>The standard distributions — binomial, normal, Poisson, and exponential — have natural conjugate prior distributions, which can be easily looked up. For an example though, we’ll examine the Poisson distribution and an example for it below.</p>
+<p><strong>Poisson model</strong></p>
+<p>The Poisson distribution appears when studying count data. The probability distribution of a single observation is</p>
+<p><span class="math display">\[
+p(y|\theta) = \frac{\theta^ye^{-\theta}}{y!}\quad \text{for} y=0,1,2,\ldots
+\]</span></p>
+<p>Thus, if we have <span class="math inline">\(n\)</span> IID observations, the likelihood is</p>
+<p><span class="math display">\[
+p(y|\theta) = \prod_{i=1}^n p(y_i|\theta) \propto \theta^{\sum_{i=1}^n y_i} e^{-n\theta}
+\]</span></p>
+<p>We’ll skip some arithmetic found in the text and just say that the conjugate prior for the Poisson distribution is</p>
+<p><span class="math display">\[
+p(\theta) \propto e^{-\beta\theta}\theta^{\alpha-1}
+\]</span></p>
+<p>which is a gamma density with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>: Gamma(<span class="math inline">\(\alpha,\beta\)</span>). With this prior, we can calculate the posterior for the Poisson as</p>
+<p><span class="math display">\[
+\theta|y \sim \text{Gamma}(\alpha+n\bar{y},\beta + n)
+\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of observed data and <span class="math inline">\(\bar{y}\)</span> is the mean of the IID observations.</p>
+<div id="estimating-a-rate-from-poisson-data-an-idealized-example" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Estimating a rate from Poisson data: an idealized example</h3>
+<p>Suppose we’re interested in modeling the number of people who die annually due to asthma in a certain U.S. city. Let’s say, last year we know 3 out 200,000 people died, or roughly a mortality rate of 1.5 cases per 100,000 persons per year.</p>
+<p>We can express this via a sampling distribution of <span class="math inline">\(y\)</span>, the number of deaths in a city of 200,000 in one year, as Poisson(<span class="math inline">\(2.0\theta\)</span>), where <span class="math inline">\(\theta\)</span> represents the true underlying long-term asthma mortality rate (measured in cases per 100,000 people per year). We have our one observation, <span class="math inline">\(y=3\)</span>, and also the “coefficient” of 2.0, to adjust for <span class="math inline">\(\theta\)</span> being defined in terms of 100,000.</p>
+<p>First, we’ll establish a prior distribution. We can scour some previous reports and find that in Western nations, the typical asthma mortality rate is around 0.6 per 100,000 persons per year. We also believe that it’ll be very unlikely for rates to exceed 1.5 per 100,000. We know that a convenient conjugate prior for the Poisson distribution is the gamma distribution. Through a little trial and error, we find that Gamma(<span class="math inline">\(3.0,5.0\)</span>) gives a pretty good approximation to our world knowledge: the mean is 0.6 and 97.5% of the density is below 1.44. Through a quick simulation we can verify this: <code>mean(rgamma(1000, 3, 5))=0.601</code> and <code>qgamma(0.975, 3, 5)=1.445</code>. This prior density takes the shape of:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quantile =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">by=</span><span class="fl">0.01</span>)
+<span class="kw">plot</span>(quantile,<span class="kw">dgamma</span>(quantile, <span class="dv">3</span>, <span class="dv">5</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<p><img src="BayesianDataAnalysisWorkbook_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Given the likelihood and the prior, we can calculate the posterior distribution, given above. With <span class="math inline">\(y=3.0\)</span> and <span class="math inline">\(x=2\)</span> (the <em>exposure</em> of the Poisson, described in the text), we can find the new posterior parameters make</p>
+<p><span class="math display">\[
+\theta|y \sim \text{Gamma}(6.0, 7.0)
+\]</span></p>
+<p>Using this, for example, we can calculate the posterior probability that the long-term mortality rate from asthma in this city being over, e.g. 1.0 per 100,000 persons per year, is <code>pgamma(1.0, 6, 7, lower.tail = F)=0.301</code>, or about 30.1%.</p>
+<p>There’s a good exponential distribution example in the text that I won’t repeat here; I encourage it as review. One key topic I will mention which is introduced in this example is the predicitive distribution — the marginal distribution of <span class="math inline">\(y\)</span>, averaging over the prior distribution of <span class="math inline">\(\theta\)</span> — which is interpreted as the distribution of possible unobserved values conditional on the observed ones.</p>
+</div>
+</div>
+<div id="noninformative-and-weakly-informative-priors" class="section level2">
+<h2><span class="header-section-number">3.4</span> Noninformative and Weakly Informative Priors</h2>
+<p>Without knowledge of an underlying population, it can be difficult to construct a prior distribution. Sometimes, one might instead construct a vague, flat, diffuse, or <em>noninformative</em> prior. Sometimes, one might have a little knowledge of the population, and wish to construct a <em>weakly informative</em> prior. Noninformative priors can be uncomfortably subjective (e.g. if there is no clear choice for a vague prior distribution) and introduce issues in later calculations of the posterior. As the number of parameters in a given model grows, we may wish to turn toward hierarchical models, something we’ll get to later.</p>
+<p>For an example, a noninformative prior on a binomial likelihood might be the conjugates Beta(<span class="math inline">\(\frac{1}{2}, \frac{1}{2}\)</span>) (the Jeffreys’ prior density based upon the Fisher Information of the binomial) or Beta(<span class="math inline">\(1, 1\)</span>) (the Bayes-Laplace uniform prior density). Yet, it is still possibly to apply an uninformative prior if we go to the work to check that the posterior density is finite for all <span class="math inline">\(y\)</span> over <span class="math inline">\(\int p(\theta|y)d\theta\)</span> (it is <em>proper</em>) and to check the sensitivity of posterior inferences to our assumptions based upon convenience (to be discussed).</p>
+<p>We may, though, have some reasonably knowledge of the population beforehand and wish to construct a <em>weakly informative</em> prior. For example, in a sex ratio problem, we may wish to begin modeling the binomial data with Beta(<span class="math inline">\(20,20\)</span>), which is centered at 0.5 and contains a reasonable amount of information about the ratio of males to females.</p>
+</div>
+<div id="single-parameter-example" class="section level2">
+<h2><span class="header-section-number">3.5</span> Single-parameter Example</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<pre><code>## ── Attaching packages ─────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.4
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<p>Suppose we have a Bulgarian friend named Georgi (Bulgarians don’t get enough recognition and Georgi is a good name). The average height of men in Bulgaria is 5 ft 9 in. We don’t however know the variance of this estimate, so let’s just say that most (95%) of men are between 5 ft 5 in and 6 ft 1 in, thus the SD is <span class="math inline">\(\sigma = \frac{2}{12}\)</span> (2 inches). Now, Georgi just got his height measured for the first time in years. What can we say about the national average then?</p>
+<p>What’s the probability, after adding Georgi’s height to the national database that the average Bulgarian man is taller than 6’? Our parameter is the male Bulgarian height, and we have one data point (for Georgi), and we have a value to compare to: 6 feet.</p>
+<p>We use <span class="math inline">\(\mu\)</span> to denote the height of Bulgarian men. We’re pretending that we know the population variance, <span class="math inline">\(\sigma^2 = \frac{1}{36}\)</span>. We want to know, after adding Georgi’s height <span class="math inline">\(y\)</span>, what is P(<span class="math inline">\(\mu &gt; 6 | \sigma^2, y\)</span>)?</p>
+<p>We first need a likelihood and a prior. The likelihood <span class="math inline">\(p(y|\mu)\)</span> is the gaussian equation <span class="math inline">\(\mathcal{N}(y|\mu,\sigma^2)\)</span>. We’ll choose a conjugate prior for simplicity, another exponential of quadratic form (just like the normal). This comes with two hyperparameters: <span class="math inline">\(\mu \sim \mathcal{N}(\mu_0,\tau_0^2)\)</span> (a mean and variance).</p>
+<p>Here, <span class="math inline">\(\mu_0\)</span> is our starting mean of <span class="math inline">\(5.75\)</span> and we assume we know our starting variance <span class="math inline">\(\tau_0^2 = \frac{1}{36}\)</span>. This is the same as <span class="math inline">\(\sigma^2\)</span> because our new sample of Georgi’s height supposedly follows this assumed variance. Let’s set all our knowns right now:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">parameter =<span class="st"> </span><span class="kw">seq</span>(<span class="fl">4.5</span>, <span class="dv">7</span>, <span class="dt">by=</span><span class="fl">0.01</span>)
+
+mu_<span class="dv">0</span> =<span class="st"> </span><span class="fl">5.75</span> <span class="co"># prior mean</span>
+sig_<span class="dv">0</span> =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">6</span> <span class="co"># population SD</span>
+tau_<span class="dv">0</span> =<span class="st"> </span>sig_<span class="dv">0</span> <span class="co"># prior SD</span></code></pre></div>
+<p>We can visualize our prior distribution over <span class="math inline">\(\mu\)</span> given our starting <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\tau_0^2\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="ot">NA</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="dv">7</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))
+<span class="kw">lines</span>(parameter, <span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>tau_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(parameter <span class="op">-</span><span class="st"> </span>mu_<span class="dv">0</span>)<span class="op">^</span><span class="dv">2</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)
+<span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">6</span>)</code></pre></div>
+<p><img src="BayesianDataAnalysisWorkbook_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Only the x-axis are heights (4 ft 6 in to 7 ft 0 in) and on the y-axis is the unnormalized density.</p>
+<p>Using this, we can answer the question: without taking into any new data, what’s the probability that a man is taller than 6 ft? <code>1-pnorm(6, mu_0, tau_0)</code> = 0.067 is the probability of Bulgarian men, on our prior, being taller than 6 feet. Hence, there’s only a 6.7% chance that a random sample from our prior of male Bulgarian heights is over 6 ft!</p>
+<p>The conjugate prior implies the posterior will take on the same form. We can analytically determine the posterior by multiplying the prior and the likelihood with the single datum:</p>
+<p><span class="math display">\[
+p(\mu|y) \propto \exp\big(-\frac{1}{2}\big(\frac{(y-\mu)^2}{\sigma^2} + \frac{(\mu - \mu_0)^2}{\tau_0^2}\big)\big)
+\]</span></p>
+<p>We can simplify this a bit for:</p>
+<p><span class="math display">\[
+p(\mu|y) \propto \exp\big(-\frac{1}{2\tau_1^2}(\mu - \mu_1)^2\big)
+\]</span></p>
+<p>where the terms were collected as: <span class="math inline">\(\tau_1^2 = \frac{1}{1/\tau_0^2 + 1/\sigma_0^2}\)</span> and <span class="math inline">\(\mu_1 = \frac{\mu_0 / \tau_0^2 + y/\sigma^2}{1/\tau_0^2 + 1/\sigma^2}\)</span>. This is all to say that we’re incorporating our new datum into our known information (the prior) by means of the likelihood. <span class="math inline">\(\tau_1^2\)</span> and <span class="math inline">\(\mu_1^2\)</span> are updated parameters which we can use after this as well with new data.</p>
+<p>Translated into code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span><span class="cf">function</span> (y) {
+  <span class="co"># set the posterior mean, a weighted average of the prior and the likelihood</span>
+  mu_<span class="dv">1</span> &lt;-<span class="st"> </span>(mu_<span class="dv">0</span><span class="op">/</span>tau_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">/</span>sig_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>tau_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>sig_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span>)
+  
+  <span class="co"># set the posterior variance (note: not the SD, watch the exponentials later)</span>
+  tau_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">/</span>tau_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>sig_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span>)
+  
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mu_1 =</span> mu_<span class="dv">1</span>, <span class="dt">tau_1 =</span> tau_<span class="dv">1</span>))
+}</code></pre></div>
+<p>Now, we measured Georgi at the beginning of this example. His height ended up being 6 ft 5 in. He’s a bit on the taller side, so how does this change our belief about Bulgarian men being taller than 6 ft?</p>
+<p>Here’s the unnormalized prior and the unnormalized posterior (including information about Georgi):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior_params &lt;-<span class="st"> </span><span class="kw">posterior</span>(<span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span><span class="op">/</span><span class="dv">12</span>) <span class="co"># 6 feet plus 5 inches</span>
+posterior_params</code></pre></div>
+<pre><code>## $mu_1
+## [1] 6.083333
+## 
+## $tau_1
+## [1] 0.01388889</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first, the prior in black</span>
+
+<span class="kw">plot</span>(<span class="ot">NA</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">4.5</span>,<span class="dv">7</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.1</span>))
+<span class="kw">lines</span>(parameter, <span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>tau_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(parameter <span class="op">-</span><span class="st"> </span>mu_<span class="dv">0</span>)<span class="op">^</span><span class="dv">2</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)
+
+<span class="co"># second, the posterior in red (with a vertical line for 6 ft)</span>
+
+national_height &lt;-<span class="st"> </span><span class="dv">6</span>
+<span class="kw">abline</span>(<span class="dt">v =</span> national_height)
+
+<span class="kw">par</span>(<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)
+<span class="kw">lines</span>(parameter, <span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>posterior_params<span class="op">$</span>tau_<span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>(parameter <span class="op">-</span><span class="st"> </span>posterior_params<span class="op">$</span>mu_<span class="dv">1</span>)<span class="op">^</span><span class="dv">2</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<p><img src="BayesianDataAnalysisWorkbook_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>It’s a little difficult to see, but the posterior density has gotten slightly narrower to account for the increase in precision of the estimate. We also see a pretty significant shift to the right.</p>
+<p>What’s the probability that a randomly sampled man in our posterior distribution will be over 6 ft? By integration: <code>1-pnorm(6, 6.0833, sqrt(0.01389)) = 0.76</code>. We went from a mere 7% chance to now over 76%! How?</p>
+<p>…</p>
+<p>What’s the probability that a randomly sampled <em>future</em> man will be over 6 ft given our one new measurement from Georgi? We will construct the posterior predictive distribution, <span class="math inline">\(p(\tilde{y}|y)\)</span>, by integrating out the parameter <span class="math inline">\(\mu\)</span>. Due to the uncertainty from the start in <span class="math inline">\(\sigma^2\)</span> and in <span class="math inline">\(\mu\)</span> through <span class="math inline">\(\tau_1^2\)</span>, we add the variances together to account for unknowns in the predictive variance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(<span class="dv">6</span>, posterior_params<span class="op">$</span>mu_<span class="dv">1</span>, <span class="kw">sqrt</span>(sig_<span class="dv">0</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>posterior_params<span class="op">$</span>tau_<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 0.6584543</code></pre>
+<p>Or, approximately 66% probability that a future man will be over 6 ft.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BayesianDataAnalysisWorkbook.pdf", "BayesianDataAnalysisWorkbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
